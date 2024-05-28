@@ -29,7 +29,7 @@
     </div>
     <!-- end hero area -->
 
-    <!-- Product details start -->
+    <!-- lesson details start -->
 
     <section class="shop_section layout_padding">
         <div class="container">
@@ -41,28 +41,26 @@
                     <div class="box">
 
                         <div class="div_center">
-                            <img width="400" src="/products/{{ $data->image }}" alt="">
+                            <img width="400" src="/lessons/{{ $data->image }}" alt="">
                         </div>
 
                         <div class="detail-box">
                             <h6>
+                                {{ $data->topic }}
+                            </h6>
+                            <h6> Author :
+                                <span>{{ $data->author }}</span>
+                            </h6>
+                        </div>
+                        <div class="div_center">
+                            <h6>
                                 {{ $data->title }}
                             </h6>
-                            <h6> Price
-                                <span>{{ $data->price }} K</span>
-                            </h6>
                         </div>
                         <div class="detail-box">
-                            <h6> Available Quantity
-                                <span>{{ $data->quantity }}</span>
-                            </h6>
-                        </div>
-                        <div class="detail-box">
-                            <p>{{ $data->description }}</p>
+                            <p><br>{!! nl2br(e($data->materi)) !!}</p>
 
                         </div>
-
-
 
 
                     </div>
@@ -74,7 +72,7 @@
     </section>
 
 
-    <!-- Product details end -->
+    <!-- lesson details end -->
 
 
 

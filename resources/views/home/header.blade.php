@@ -12,8 +12,8 @@
                                     class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="shop.html">
-                                Shop
+                            <a class="nav-link" href="{{ url('/materi') }}">
+                                Materi
                             </a>
                         </li>
                         <li class="nav-item">
@@ -26,9 +26,6 @@
                     <div class="user_option">
                         @if (Route::has('login'))
                             @auth
-                                <a href="">
-                                    <i class="fa fa-shopping-bag" aria-hidden="true"></i>
-                                </a>
 
 
                                 <form style="padding: 10px" method="POST" action="{{ route('logout') }}">

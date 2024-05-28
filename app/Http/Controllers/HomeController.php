@@ -1,10 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Requests\StoreTestRequest;
 use Illuminate\Http\Request;
+use App\Models\Option;
+use App\Models\Lesson;
+use App\Models\Result;
+use App\Models\User;
 
-use App\Models\Product;
 
 class HomeController extends Controller
 {
@@ -15,19 +18,69 @@ class HomeController extends Controller
 
     public function home()
     {
-        $product = Product::all();
-        return view('home.index', compact('product'));
+        $lesson = Lesson::all();
+        return view('home.index', compact('lesson'));
     }
     
     public function login_home()
     {
-        $product = Product::all();
-        return view('home.index', compact('product'));
+        $lesson = Lesson::all();
+        return view('home.index', compact('lesson'));
     }
 
-    public function product_details($id)
+    public function lesson_details($id)
     {
-        $data = Product::find($id);
-        return view('home.product_details', compact('data'));
+        $data = Lesson::find($id);
+        return view('home.lesson_details', compact('data'));
+    }
+
+    public function materi()
+    {
+        $lesson = Lesson::all();
+        return view('home.materi', compact('lesson'));
+    }
+
+    public function index_test()
+    {
+        $lessons = Lesson::with(['lessonQuestions' => function ($query) {
+                $query->inRandomOrder()
+                    ->with(['questionOptions' => function ($query) {
+                        $query->inRandomOrder();
+                    }]);
+            }])
+            ->whereHas('lessonQuestions')
+            ->get();
+
+        return view('home.test', compact('lessons'));
+    }
+
+    public function test_store(StoreTestRequest $request)
+    {
+        
+    $options = Option::find(array_values($request->input('questions')));
+
+    $result = auth()->user()->userResults()->create([
+        'total_points' => $options->sum('points')
+    ]);
+
+    $questions = $options->mapWithKeys(function ($option) {
+        return [$option->question_id => [
+            'option_id' => $option->id,
+            'points' => $option->points
+        ]];
+    })->toArray();
+
+    $result->questions()->sync($questions);
+
+    return redirect()->route('results_show', $result->id);
+    }
+
+
+    public function show($result_id){
+        $result = Result::whereHas('user', function ($query) {
+            $query->whereId(auth()->id());
+        })->findOrFail($result_id);
+    
+        return view('home.results', compact('result'));
     }
 }

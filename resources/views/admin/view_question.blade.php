@@ -47,37 +47,29 @@
                 <div class="div_deg">
                     <table class="table_deg">
                         <tr>
-                            <th>Product Title</th>
+                            <th>Id</th>
 
-                            <th>Description</th>
+                            <th>Topic</th>
 
-                            <th>Price</th>
-
-                            <th>Quantity</th>
-
-                            <th>Image</th>
+                            <th>Questions</th>
 
                             <th>Edit</th>
 
                             <th>Delete</th>
                         </tr>
 
-                        @foreach ($product as $products)
+                        @foreach ($question as $questions)
                             <tr>
-                                <td>{{ $products->title }}</td>
-                                <td>{{ Str::limit($products->description, 50) }}</td>
-                                <td>{{ $products->price }}</td>
-                                <td>{{ $products->quantity }}</td>
+                                <td>{{ $questions->id }}</td>
+                                <td>{{ $questions->lesson_id }}</td>
+                                <td>{{ Str::limit($questions->question_text, 100) }}</td>
                                 <td>
-                                    <img height="120" width="120" src="products/{{ $products->image }}">
-                                </td>
-
-                                <td>
-                                    <a class="btn btn-success" href="{{ url('update_product', $products->id) }}">Edit</a>
+                                    <a class="btn btn-success"
+                                        href="{{ url('update_question', $questions->id) }}">Edit</a>
                                 </td>
                                 <td>
                                     <a class="btn btn-danger" onclick="confirmation(event)"
-                                        href="{{ url('delete_product', $products->id) }}">Delete</a>
+                                        href="{{ url('delete_question', $questions->id) }}">Delete</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -89,7 +81,7 @@
                 </div>
 
                 <div class="div_deg">
-                    {{ $product->onEachSide(1)->links() }}
+                    {{ $question->onEachSide(1)->links() }}
                 </div>
 
 

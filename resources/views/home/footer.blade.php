@@ -65,7 +65,7 @@
                             </a>
                             <a href="">
                                 <i class="fa fa-envelope" aria-hidden="true"></i>
-                                <span> nirwana@gmail.com</span>
+                                <span> studyquiz@gmail.com</span>
                             </a>
                         </div>
                     </div>
@@ -77,7 +77,7 @@
             <div class="container">
                 <p>
                     in <span id="displayYear"></span> Worked on with &hearts; By
-                    <a href="https://html.design/">Group 5</a>
+                    <a href="https://html.design/">Adila</a>
                 </p>
             </div>
         </footer>

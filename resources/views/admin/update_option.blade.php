@@ -45,33 +45,25 @@
                 <h2>Update Materi</h2>
 
                 <div class="div_deg">
-                    <form action="{{ url('edit_lesson', $data->id) }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ url('edit_option', $option->id) }}" method="post" enctype="multipart/form-data">
 
                         @csrf
                         <div>
-                            <label>Topic Materi</label>
-                            <input type="text" name="topic" value="{{ $data->topic }}">
+                            <label>Question</label>
+                            <select name="question" required>
+                                <option>Select a Question</option>
+                                @foreach ($questions as $question)
+                                    <option value="{{ $question->id }}">{{ $question->question_text }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div>
-                            <label>Judul</label>
-                            <input type="text" name="title" value="{{ $data->title }}">
+                            <label>Option Text</label>
+                            <textarea id="option_text" name="option_text"></textarea>
                         </div>
                         <div>
-                            <label>Materi</label>
-                            <textarea name="materi">{{ $data->materi }}</textarea>
-                        </div>
-                        <div>
-                            <label>Author</label>
-                            <input type="text" name="author" value="{{ $data->author }}">
-                        </div>
-                        <div>
-                            <label>Current Image</label>
-                            <img width="150" src="/lessons/{{ $data->image }}">
-                        </div>
-
-                        <div>
-                            <label>New Image</label>
-                            <input type="file" name="image">
+                            <label>Points</label>
+                            <input type="number" name="points" min="0">
                         </div>
 
                         <div>

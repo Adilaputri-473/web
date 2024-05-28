@@ -50,36 +50,25 @@
         <div class="page-header">
             <div class="container-fluid">
 
-                <h1>Add Product</h1>
+                <h1>Add Materi</h1>
 
                 <div class="div_deg">
 
-                    <form action="{{ url('upload_product') }}" method="Post" enctype="multipart/form-data">
+                    <form id="form" action="{{ url('upload_result') }}" method="Post" enctype="multipart/form-data">
 
                         @csrf
                         <div class="input_deg">
-                            <label>Product Title</label>
-                            <input type="text" name="title" required>
+                            <label>Question</label>
+                            <select name="question" required>
+                                <option>Select a Question</option>
+                                @foreach ($questions as $id => $question)
+                                    <option value="{{ $id }}">{{ $question }}</option>
+                                @endforeach
+                            </select>
                         </div>
-
                         <div class="input_deg">
-                            <label>Description</label>
-                            <textarea name="description"></textarea>
-                        </div>
-
-                        <div class="input_deg">
-                            <label>Price</label>
-                            <input type="text" name="price">
-                        </div>
-
-                        <div class="input_deg">
-                            <label>Quantity</label>
-                            <input type="number" name="qty">
-                        </div>
-
-                        <div class="input_deg">
-                            <label>Product Image</label>
-                            <input type="file" name="image">
+                            <label>Total Point</label>
+                            <input type="number" name="total_points" min="0">
                         </div>
 
                         <div class="input_deg">
@@ -94,6 +83,8 @@
     </div>
     <!-- JavaScript files-->
     @include('admin.js')
+
+    <!-- JavaScript for formatting text-->
 </body>
 
 </html>
